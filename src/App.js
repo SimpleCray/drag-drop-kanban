@@ -1,25 +1,21 @@
-import logo from './logo.svg';
+import { ThemeProvider } from '@mui/material';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import './App.css';
+import Kanban from './components/Kanban';
+import store, { persistor } from './redux/store';
+import { themeMaterial } from './theme';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Provider store={store}>
+            <PersistGate persistor={persistor}>
+                <ThemeProvider theme={themeMaterial}>
+                    <Kanban />
+                </ThemeProvider>
+            </PersistGate>
+        </Provider>
+    );
 }
 
 export default App;
